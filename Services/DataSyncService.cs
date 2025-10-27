@@ -20,7 +20,7 @@ public class DataSyncService
 
     public async Task FetchAndSaveNewDataAsync()
     {
-        string today = "2025-10-13"; //DateTime.UtcNow.ToString("yyyy-MM-dd");
+        string today = DateTime.UtcNow.ToString("yyyy-MM-dd");
         int page = 0;
         int totalInserted = 0;
 

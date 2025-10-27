@@ -186,3 +186,4 @@
 /Users/andrabi/Desktop/Developer/EbarimtCheckerService/obj/Debug/net9.0/EbarimtCheckerService.pdb
 /Users/andrabi/Desktop/Developer/EbarimtCheckerService/obj/Debug/net9.0/EbarimtCheckerService.genruntimeconfig.cache
 /Users/andrabi/Desktop/Developer/EbarimtCheckerService/obj/Debug/net9.0/ref/EbarimtCheckerService.dll
+/Users/andrabi/Desktop/Developer/EbarimtCheckerService/obj/Debug/net9.0/EbarimtCheckerService.sourcelink.json
