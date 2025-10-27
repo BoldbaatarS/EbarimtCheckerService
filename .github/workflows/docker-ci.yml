@@ -46,13 +46,15 @@ jobs:
         key: ${{ secrets.SERVER_SSH_KEY }}
         script: |
           cd /home/user/project
-          if [ ! -d "ebarimt" ]; then
-            git clone https://github.com/BoldbaatarS/EbarimtCheckerService.git ebarimt
+          if [ ! -d "ebarimt/.git" ]; then
+          echo "Cloning repo for the first time..."
+          git clone https://github.com/BoldbaatarS/EbarimtCheckerService.git ebarimt
           else
+            echo "Repo already exists. Pulling latest changes..."
             cd ebarimt
             git pull
           fi
-          
+
           cd /home/user/project/ebarimt
           docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
           docker compose pull
