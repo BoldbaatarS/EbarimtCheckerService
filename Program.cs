@@ -41,12 +41,14 @@ app.MapGet("/products", async (AppDbContext db) =>
 });
 
 // Get product by barcode
+//https://electromon.com/products/8028338990956
 app.MapGet("/products/{barcode}", async (string barcode, AppDbContext db) =>
 {
     var product = await db.Products.FirstOrDefaultAsync(p => p.BarCode == barcode);
     return product is not null ? Results.Ok(product) : Results.NotFound();
 });
-
+// Get products with pagination and optional date filter
+// https://electromon.com/products/page/1?size=50&date=2025-10-13
 app.MapGet("/products/page/{page:int}", async (int page, int? size, DateTime? date, AppDbContext db) =>
 {
     int pageSize = size ?? 10;
@@ -84,6 +86,8 @@ app.MapGet("/products/page/{page:int}", async (int page, int? size, DateTime? da
 
     return Results.Ok(response);
 });
+// Get products updated after a specific date with pagination
+// https://electromon.com/products/updates?fromDate=2025-10-13&size=50&page=1
 app.MapGet("/products/updates", async (DateTime fromDate, int? size, int? page, AppDbContext db) =>
 {
     int pageSize = size ?? 100;
