@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EbarimtCheckerService")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c112ffa9a9d87d52e3452df75e5d1022718b0e03")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a0859a78285355fb251189424102fd8f7ec63992")]
 [assembly: System.Reflection.AssemblyProductAttribute("EbarimtCheckerService")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EbarimtCheckerService")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using EbarimtCheckerService.Data;
 using EbarimtCheckerService.Models;
 using EbarimtCheckerService.Services;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,8 +29,6 @@ using (var scope = app.Services.CreateScope())
     db.Database.Migrate(); // ⚡️ автоматаар schema үүсгэнэ
 }
 
-
-
 // ---------------------------
 // 📍 REST API Endpoint
 // ---------------------------
@@ -46,6 +45,15 @@ app.MapGet("/products/{barcode}", async (string barcode, AppDbContext db) =>
 {
     var product = await db.Products.FirstOrDefaultAsync(p => p.BarCode == barcode);
     return product is not null ? Results.Ok(product) : Results.NotFound();
+});
+// POST by Batch product lookup
+app.MapPost("/products/batch", async ([FromBody] List<string> barcodes, AppDbContext db) =>
+{
+    var products = await db.Products
+        .Where(p => barcodes.Contains(p.BarCode))
+        .ToListAsync();
+
+    return Results.Ok(products);
 });
 // Get products with pagination and optional date filter
 // https://electromon.com/products/page/1?size=50&date=2025-10-13
