@@ -49,6 +49,9 @@ app.MapGet("/products/{barcode}", async (string barcode, AppDbContext db) =>
 // POST by Batch product lookup
 app.MapPost("/products/batch", async ([FromBody] List<string> barcodes, AppDbContext db) =>
 {
+    if (barcodes == null || !barcodes.Any())
+        return Results.BadRequest("Barcodes are required.");
+
     var products = await db.Products
         .Where(p => barcodes.Contains(p.BarCode))
         .ToListAsync();
