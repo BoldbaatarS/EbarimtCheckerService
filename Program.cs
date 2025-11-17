@@ -34,20 +34,20 @@ using (var scope = app.Services.CreateScope())
 // ---------------------------
 
 // Get all products
-app.MapGet("/products", async (AppDbContext db) =>
+app.MapGet("/buna/products", async (AppDbContext db) =>
 {
     return await db.Products.ToListAsync();
 });
 
 // Get product by barcode
 //https://electromon.com/buna/products/8028338990956
-app.MapGet("/products/{barcode}", async (string barcode, AppDbContext db) =>
+app.MapGet("/buna/products/{barcode}", async (string barcode, AppDbContext db) =>
 {
     var product = await db.Products.FirstOrDefaultAsync(p => p.BarCode == barcode);
     return product is not null ? Results.Ok(product) : Results.NotFound();
 });
 // POST by Batch product lookup
-app.MapPost("/products/batch", async ([FromBody] List<string> barcodes, AppDbContext db) =>
+app.MapPost("/buna/products/batch", async ([FromBody] List<string> barcodes, AppDbContext db) =>
 {
     if (barcodes == null || !barcodes.Any())
         return Results.BadRequest("Barcodes are required.");
@@ -60,7 +60,7 @@ app.MapPost("/products/batch", async ([FromBody] List<string> barcodes, AppDbCon
 });
 // Get products with pagination and optional date filter
 // https://electromon.com/buna/products/page/1?size=50&date=2025-10-13
-app.MapGet("/products/page/{page:int}", async (int page, int? size, DateTime? date, AppDbContext db) =>
+app.MapGet("/buna/products/page/{page:int}", async (int page, int? size, DateTime? date, AppDbContext db) =>
 {
     int pageSize = size ?? 10;
     if (page < 1) page = 1;
@@ -99,7 +99,7 @@ app.MapGet("/products/page/{page:int}", async (int page, int? size, DateTime? da
 });
 // Get products updated after a specific date with pagination
 // https://electromon.com/buna/products/updates?fromDate=2025-10-13&size=50&page=1
-app.MapGet("/products/updates", async (DateTime fromDate, int? size, int? page, AppDbContext db) =>
+app.MapGet("/buna/products/updates", async (DateTime fromDate, int? size, int? page, AppDbContext db) =>
 {
     int pageSize = size ?? 100;
     int currentPage = page ?? 1;
